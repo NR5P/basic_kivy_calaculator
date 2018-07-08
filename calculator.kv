@@ -4,7 +4,7 @@
 <CalcGridLayout>:
     id: calculator
     display: entry
-    rows: 5
+    rows: 6
     padding: 10
     spacing: 10
 
@@ -13,6 +13,20 @@
             id: entry
             font_size: 32
             multiline: False
+    BoxLayout:
+        spacing: 10
+        CustomButton:
+            text: "AC"
+            on_press: entry.text = ""
+        CustomButton:
+            text: "Del"
+            on_press: calculator.del_function()
+        CustomButton:
+            text: "("
+            on_press: entry.text += self.text
+        CustomButton:
+            text: ")"
+            on_press: entry.text += self.text
     BoxLayout:
         spacing: 10
         CustomButton:
@@ -26,7 +40,7 @@
             on_press: entry.text += self.text
         CustomButton:
             text: "+"
-            on_press: entry.text += self.text
+            on_press: calculator.operator_check(self.text)
     BoxLayout:
         spacing: 10
         CustomButton:
@@ -40,7 +54,7 @@
             on_press: entry.text += self.text
         CustomButton:
             text: "-"
-            on_press: entry.text += self.text
+            on_press: calculator.operator_check(self.text)
     BoxLayout:
         spacing: 10
         CustomButton:
@@ -54,20 +68,20 @@
             on_press: entry.text += self.text
         CustomButton:
             text: "*"
-            on_press: entry.text += self.text
+            on_press: calculator.operator_check(self.text)
     BoxLayout:
         spacing: 10
         CustomButton:
-            text: "AC"
-            on_press: entry.text = ""
-        CustomButton:
             text: "0"
             on_press: entry.text += self.text
+        CustomButton:
+            text: "."
+            on_press: calculator.period_check()
         CustomButton:
             text: "="
             on_press: calculator.calculate(entry.text)
         CustomButton:
             text: "/"
-            on_press: entry.text += self.text
+            on_press: calculator.operator_check(self.text)
 
 
